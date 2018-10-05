@@ -125,7 +125,7 @@ describe('DELETE /todos/:id', () => {
                     return done(err);
                 }
                 Todo.findById(hexId).then((todo) => {
-                    expect(todo).not.toBeTruthy();
+                    expect(todo).toBeFalsy();
                     done();
                 })
                 .catch((e) => done(e));
@@ -336,7 +336,7 @@ describe('POST /users/login', () => {
                 User.findById(users[1]._id).then((user) => {
                     // console.log(user.email);
                     // console.log(user.tokens);
-                    expect(user.tokens[1]).toMatchObject({
+                    expect(user.toObject().tokens[1]).toMatchObject({
                         access: 'auth',
                         token: res.headers['x-auth']
                     });
